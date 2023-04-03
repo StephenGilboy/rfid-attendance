@@ -1,0 +1,102 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <!--begin::Content container-->
+    <div id="kt_app_content_container" class="app-container container-fluid">
+        <!--begin::Row-->
+        <div class="row gx-5 gx-xl-10">
+            <!--begin::Col-->
+            <div class="col-xl-6 mb-5 mb-xl-10">
+                <!--begin::Tables widget 16-->
+                <div class="card card-flush h-xl-100">
+                    <!--begin::Header-->
+                    <div class="card-header pt-5">
+                        <!--begin::Title-->
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label fw-bold text-gray-800">Student Attendance</span>
+                            <span class="text-gray-400 mt-1 fw-semibold fs-6">Today</span>
+                        </h3>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body pt-6">
+                        <!--begin::Tab Content-->
+                        <div class="tab-content">
+                            <!--begin::Tap pane-->
+                            <div class="tab-pane fade show active">
+                                <!--begin::Table container-->
+                                <span class="table-responsive">
+                                    <!--begin::Table-->
+                                    <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
+                                        <!--begin::Table head-->
+                                        <thead>
+                                            <tr class="fs-7 fw-bold text-gray-400 border-bottom-0">
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>RFID Tag</th>
+                                                <th>In Class</th>
+                                                <th>Last Seen</th>
+                                            </tr>
+                                        </thead>
+                                        <!--end::Table head-->
+                                        <!--begin::Table body-->
+                                        <tbody>
+                                            @foreach (var s in Model.Students)
+                                                {
+                                                    var tagId = s.RfidTag?.Id ?? "Unassigned";
+                                                    var inClass = (s.RfidTag?.IsCurrenltyInAttendance ?? false) ? "Yes" : "No";
+                                                    var color = inClass == "Yes" ? "success" : "danger";
+                                                    var lastSeen = s.RfidTag?.LastSeen.ToLocalTime().ToShortTimeString() ?? "2001-01-01";
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="d-flex justify-content-start flex-column">
+                                                                <a href="/Student/Details/@s.Id" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">@s.FirstName</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="d-flex justify-content-start flex-column">
+                                                                <a href="/Student/Details/@s.Id" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">@s.LastName</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-end pe-13">
+                                                        <span class="text-gray-600 fw-bold fs-6">@tagId</span>
+                                                    </td>
+                                                    <td class="text-end pe-0">
+                                                        <span class="text-gray-600 fw-bold fs-6">@inClass</span>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <span class="text-gray-600 fw-bold fs-6">@lastSeen</span>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <!--end::Table body-->
+                                    </table>
+                                    <!--end::Table-->
+                                </span>
+                            </div>
+                           <!--end::Table container-->
+                        </div>
+                        <!--end::Tap pane-->
+                    </div>
+                    <!--end: Card Body-->
+                </div>
+                <!--end::Tables widget 16-->
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Row-->
+    </div>
+    <!--end::Content container-->
+</div>
+<!--end::Content-->

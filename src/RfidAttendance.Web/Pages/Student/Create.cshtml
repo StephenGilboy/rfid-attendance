@@ -1,0 +1,83 @@
+﻿@page
+@model RfidAttendance.Web.Pages.Student.CreateModel
+@{
+    ViewData["Title"] = "Create a Student";
+}
+
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <!--begin::Content container-->
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <!--begin::Layout-->
+        <div class="d-flex flex-column flex-lg-row">
+            <!--begin::Content-->
+            <div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
+                <!--begin::Card-->
+                <div class="card">
+                    <!--begin::Card body-->
+                    <div class="card-body p-12">
+                        <!--begin::Form-->
+                        <form asp-action="Post" method="post" id="kt_invoice_form">
+                            <!--begin::Wrapper-->
+                            <div class="mb-0">
+                                <!--begin::Row-->
+                                <div class="row gx-10 mb-5">
+                                    <!--begin::Col-->
+                                    <div class="col-lg-6">
+                                        <!--begin::Input group-->
+                                        <div class="mb-5">
+                                            <label asp-for="FirstName" class="form-label fs-6 fw-bold text-gray-700 mb-3"></label>
+                                            <input asp-for="FirstName" class="form-control form-control-solid" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-5">
+                                            <label asp-for="LastName" class="form-label fs-6 fw-bold text-gray-700 mb-3"></label>
+                                            <input asp-for="LastName" class="form-control form-control-solid" />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="mb-5">
+                                            <!--begin::Label-->
+                                            <label asp-for="TagId" class="form-label fw-bold fs-6 text-gray-700">RFID Tag</label>
+                                            <!--end::Label-->
+                                            <!--begin::Select-->
+                                            <select asp-for="TagId" aria-label="Select an RFID Tag" data-control="select2" class="form-select form-select-solid">
+                                                <option value="">Select an RFID Tag</option>
+                                                @foreach (var tag in Model.AvailableTags)
+                                                {
+                                                    <option value="@tag.Id">
+                                                        @tag.Id
+                                                    </option>
+                                                }
+                                            </select>
+                                            <!--end::Select-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <div class="mb-5">
+                                            <button type="submit" class="btn btn-primary">
+                                                Create
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Row-->
+                            </div>
+                            <!--end::Wrapper-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Layout-->
+    </div>
+    <!--end::Content container-->
+</div>
+<!--end::Content-->
